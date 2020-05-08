@@ -1,0 +1,55 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">{{this.title | translate}}</h2>
+  </div>
+  <div>
+    <form [formGroup]="addEditForm">
+      <mat-grid-list cols="1" rowHeight="85px">
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <mat-select matInput placeholder="{{'permission.management.modal.clientId'|translate}}"
+                          formControlName="clientId" [formControl]="myControl" required>
+                <mat-option *ngFor="let id of options" [value]="id">{{id}}</mat-option>
+              </mat-select>
+              <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
+                                (optionSelected)="getOptionValue($event)">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'permission.management.modal.url'|translate}}" formControlName="url" required>
+              <mat-error *ngIf="addEditForm.controls.url.hasError('required')">
+                {{'permission.management.modal.url.empty'|translate}}
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'permission.management.modal.description'| translate}}"
+                     formControlName="description">
+
+            </mat-form-field>
+
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="btn-sec">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="onSubmit()"
+                [disabled]="addEditForm.invalid">{{'btnAddEdit'|translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+

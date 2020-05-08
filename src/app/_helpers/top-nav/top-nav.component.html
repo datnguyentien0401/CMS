@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button id="menu" (click)="navService.appDrawer.opened ? navService.closeNav() : navService.openNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="TopToHome" (click)="goToHome()">CMS</span>
+  <span class="spacer"></span>
+  <div> <!--  fxShow="true" fxHide.lt-sm="true" -->
+    <mat-select class="mat-select-theme" [(value)]="currentTheme" [ngClass]="currentTheme" (selectionChange)="onChangeTheme($event)" style="margin-right: 10px">
+      <mat-option value="default">Default</mat-option>
+      <mat-option value="athena">Athena</mat-option>
+      <mat-option value="poseidon">Poseidon</mat-option>
+      <mat-option value="hera">Hera</mat-option>
+      <mat-option value="zeus">zeus</mat-option>
+    </mat-select>
+    <mat-select class="mat-select-language" [(value)]="selectedLanguage" [ngClass]="selectedLanguage" (selectionChange)="onChangeLanguage($event)">
+      <mat-option value="vi">
+        <img class="logo" [src]="VIFlag">
+      </mat-option>
+      <mat-option value="en">
+        <img class="logo" [src]="ENFlag">
+      </mat-option>
+    </mat-select>
+  </div>
+</mat-toolbar>

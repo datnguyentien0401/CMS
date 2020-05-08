@@ -1,0 +1,83 @@
+<h2 style="margin: auto"> {{ 'menu.management' | translate }} </h2>
+<form [formGroup]="listForm" (ngSubmit)="searchMenu()">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <mat-form-field>
+      <input matInput formControlName="text" placeholder="{{'menu.management.search'|translate}}" name="text" id="text">
+      <mat-hint align="center">{{'menu.management.search.hint'|translate}}</mat-hint>
+    </mat-form-field>
+
+    <button mat-fab color="primary">
+      <!--{{'btnSearch'|translate}}-->
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div fxLayoutAlign="space-around center">
+    <app-filter (clientIdEmmit)="filterMenuByClientId($event)"></app-filter>
+  </div>
+</form>
+
+<div class="container mat-elevation-z8">
+  <mat-table #table [dataSource]="menus">
+
+    <ng-container matColumnDef="stt">
+      <mat-header-cell *matHeaderCellDef> {{'menu.management.table.no'|translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let menu; let i = index"> {{i + 1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="clientId">
+      <mat-header-cell *matHeaderCellDef> {{'menu.management.table.clientId'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.clientId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef> {{'menu.management.table.code'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let menu" [title]="menu.code"> {{menu.code}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <mat-header-cell *matHeaderCellDef> {{'menu.management.table.url'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.url}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="appType">
+      <mat-header-cell *matHeaderCellDef> {{'menu.management.table.appType'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let menu"> {{menu.appType}} </mat-cell>
+    </ng-container>
+<!--    <ng-container matColumnDef="parentMenu">-->
+<!--      <mat-header-cell *matHeaderCellDef> {{'menu.management.table.parentMenu'|translate}}  </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let menu"> {{menu.parentMenu.id}} </mat-cell>-->
+<!--    </ng-container>-->
+
+    <ng-container matColumnDef="addEdit">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-raised-button color="primary" (click)="addMenu()">
+          <!--{{'btnAdd'|translate}}-->
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let menu">
+        <button mat-raised-button color="primary" (click)="editMenu(menu)">
+          <!--{{'btnEdit'|translate}}-->
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let menu">
+        <button mat-raised-button color="primary" (click)="deleteMenu(menu)">
+          <!--{{'btnDelete'|translate}}-->
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator (page)="getPage($event)"
+                 [length]="search.totalElements"
+                 [pageSize]="search.pageSize"
+                 [pageSizeOptions]="pageSizeOption">
+  </mat-paginator>
+</div>

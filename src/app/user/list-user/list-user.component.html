@@ -1,0 +1,80 @@
+<h2 style="margin: auto"> {{ 'user.management' | translate }} </h2>
+<form [formGroup]="listForm" (ngSubmit)="searchUser()">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <mat-form-field>
+      <input matInput formControlName="text" placeholder="{{'user.management.search'|translate}}" name="text" id="text">
+      <mat-hint align="center">{{'user.management.search.hint'|translate}}</mat-hint>
+    </mat-form-field>
+    <button mat-fab color="primary">
+      <!--{{'btnSearch'|translate}}-->
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</form>
+<div class="container mat-elevation-z8">
+  <mat-table #table [dataSource]="users">
+
+    <ng-container matColumnDef="stt">
+      <mat-header-cell *matHeaderCellDef> {{'user.management.table.no'|translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let user; let i = index"> {{i + 1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef> {{'user.management.table.username'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> {{'user.management.table.firstname'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.firstName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> {{'user.management.table.lastname'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.lastName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="addEdit">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-raised-button color="primary" (click)="addUser()">
+          <!--{{'btnAdd'|translate}}-->
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-raised-button color="primary" (click)="editUser(user)">
+          <!--{{'btnEdit'|translate}}-->
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-raised-button color="primary" (click)="deleteUser(user)">
+          <!--{{'btnDelete'|translate}}-->
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="addRole">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-raised-button color="accent" (click)="addRole(user)">
+          <mat-icon>people</mat-icon>
+        </button>
+      </mat-cell>
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator (page)="getPage($event)"
+                 [length]="search.totalElements"
+                 [pageSize]="search.pageSize"
+                 [pageSizeOptions]="pageSizeOption">
+  </mat-paginator>
+</div>

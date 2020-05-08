@@ -1,0 +1,27 @@
+{
+  "btnAddEdit": "Cập nhật",
+  "btnAdd": "Thêm",
+  "btnEdit": "Sửa",
+  "btnDelete": "Xóa",
+  "btnSearch": "Tìm kiếm",
+  "menu": {
+    "store": {
+      "fc": "Quản lý kho FC",
+      "po": "Đơn đặt hàng NCC",
+      "repacking": "Thay đổi quy cách đóng gói"
+    },
+    "Logout": "Đăng xuất"
+  },
+  "login": {
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "login": "Đăng nhập",
+    "error": "Tên đăng nhập hoặc mật khẩu không đúng"
+  },
+  "MatPaginator":{
+    "itemsPerPageLabel": "Số bản ghi trên trang",
+    "nextPageLabel": "Trang tiếp",
+    "previousPageLabel": "Trang trước",
+    "range": "của"
+  }
+}

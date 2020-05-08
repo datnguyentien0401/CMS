@@ -1,0 +1,88 @@
+<h2 style="margin: auto"> {{ 'client.management' | translate }} </h2>
+<form [formGroup]="listForm" (ngSubmit)="searchClient()">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <mat-form-field>
+      <input matInput formControlName="text" placeholder="{{'client.management.search'|translate}}" name="text"
+             id="text">
+      <mat-hint align="center">{{'client.management.search.hint'|translate}}</mat-hint>
+    </mat-form-field>
+    <button mat-fab color="primary">
+      <!--{{'btnSearch'|translate}}-->
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</form>
+
+<div class="container mat-elevation-z8">
+  <mat-table [dataSource]="clients">
+
+    <ng-container matColumnDef="stt">
+      <mat-header-cell *matHeaderCellDef> {{'client.management.table.no'|translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let client; let i = index"> {{i + 1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="clientId">
+      <mat-header-cell *matHeaderCellDef> {{'client.management.table.clientId'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{client.clientId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="scope">
+      <mat-header-cell *matHeaderCellDef> {{'client.management.table.scope'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{client.scope}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="authorities">
+      <mat-header-cell *matHeaderCellDef> {{'client.management.table.authorities'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let client" title="{{client.authorities}}"> {{client.authorities}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="accessTokenValidity">
+      <mat-header-cell
+        *matHeaderCellDef> {{'client.management.table.accessTokenValidity'|translate}}  </mat-header-cell>
+      <mat-cell *matCellDef="let client"> {{client.accessTokenValidity}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="addEdit">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-raised-button color="primary" (click)="addClient()">
+          <!--{{'btnAdd'|translate}}-->
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        <button mat-raised-button color="primary" (click)="editClient(client)">
+          <!--{{'btnEdit'|translate}}-->
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="detail">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        <button mat-raised-button color="primary" (click)="getDetail(client)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let client">
+        <button mat-flat-button color="primary" (click)="deleteClient(client)">
+          <!--{{'btnDelete'|translate}}-->
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator (page)="getPage($event)"
+                 [length]="search.totalElements"
+                 [pageSize]="search.pageSize"
+                 [pageSizeOptions]="pageSizeOption">
+  </mat-paginator>
+</div>

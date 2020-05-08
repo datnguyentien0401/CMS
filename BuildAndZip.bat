@@ -1,0 +1,1 @@
+ng build --configuration production --aot true --optimization true --build-optimizer true --named-chunks true --vendor-chunk true --output-hashing none && cd "dist" && zip -r "E:\D-Commerce\Logistics\Logistics_BUILD\ouput_for_build\CMS.zip" CMS && cd "../"

@@ -1,0 +1,38 @@
+[
+  {
+    "displayName": "menu.category",
+    "iconName": "book",
+    "children": [
+      {
+        "displayName": "menu.category.user",
+        "iconName": "face",
+        "route": "list-user"
+      },
+      {
+        "displayName": "menu.category.role",
+        "iconName": "pan_tool",
+        "route": "list-role"
+      },
+      {
+        "displayName": "menu.category.menu",
+        "iconName": "menu",
+        "route": "list-menu"
+      },
+      {
+        "displayName": "menu.category.permission",
+        "iconName": "supervisor_account",
+        "route": "list-permission"
+      },
+      {
+        "displayName": "menu.category.client",
+        "iconName": "supervisor_account",
+        "route": "list-client"
+      }
+    ]
+  },
+  {
+    "displayName": "menu.Logout",
+    "iconName": "security",
+    "route": "logout"
+  }
+]

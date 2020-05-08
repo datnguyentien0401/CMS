@@ -1,0 +1,27 @@
+{
+  "btnAddEdit": "Save",
+  "btnAdd": "Add",
+  "btnEdit": "Edit",
+  "btnDelete": "Delete",
+  "btnSearch": "Search",
+  "menu": {
+    "store": {
+      "fc": "Managerment Store FC",
+      "po": "PO",
+      "repacking": "Repacking Planning"
+    },
+    "Logout": "Logout"
+  },
+  "login": {
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "error": "Username or password is invalid"
+  },
+  "MatPaginator": {
+    "itemsPerPageLabel": "Items per page",
+    "nextPageLabel": "Next",
+    "previousPageLabel": "Previous",
+    "range": "of"
+  }
+}

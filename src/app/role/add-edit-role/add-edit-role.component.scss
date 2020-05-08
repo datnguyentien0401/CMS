@@ -1,0 +1,19 @@
+mat-form-field {
+  width: 100%;
+}
+.btn-sec {
+  text-align: right;
+  margin-top: 1rem;
+}
+.Update-btn {
+  margin: 5px;
+}
+.text-inside {
+  left: 5px;
+  width: 100%;
+}
+@media (max-width: 800px) {
+  .btn-sec {
+    margin-right: 1rem !important;
+  }
+}

@@ -1,0 +1,87 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">{{this.title | translate}} for role: {{this.role?.roleName}}</h2>
+  </div>
+
+  <div class="content">
+
+    <mat-dialog-content>
+      <div class="menuList">
+        <h3>{{'role.management.modal.menu'|translate}}:</h3>
+        <b>Mobile:</b>
+
+        <div class="MOBILE" fxLayout="row wrap" fxLayoutAlign="left">
+
+          <div class="menuRoot" *ngFor="let menu of this.menuLv1" fxFlex="50%" fxFlex.lt-md="100%" fxFlex.gt-lg="calc(100%/3)">
+            <div class="menu" *ngIf="menu.appType === this.MOBILE">
+              <mat-checkbox [value]="menu.id"
+                            (change)="changeMenuAll($event)"
+                            [checked]="isChecked(menu.id, 'menu')"
+                            [title]="menu.code">
+                {{menu.code}}
+              </mat-checkbox>
+              <div class="menuF1List">
+                <div class="menuF1" *ngFor="let menuF1 of this.menuLv2">
+                  <mat-checkbox *ngIf="menuF1.parentMenu.id === menu.id"
+                                [value]="menuF1.id"
+                                (change)="changeMenuChild($event)"
+                                [checked]="isChecked(menuF1.id, 'menu')"
+                                [title]="menuF1.code">
+                    {{menuF1.code}}
+                  </mat-checkbox>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="WEB" fxLayout="row wrap" fxLayoutAlign="left">
+          <b>Web:</b>
+          <div class="menuRoot" *ngFor="let menu of this.menuLv1" fxFlex="49%" fxFlex.lt-md="100%" fxFlex.gt-lg="calc(100%/3)">
+            <div class="menu" *ngIf="menu.appType === this.WEB">
+              <mat-checkbox [value]="menu.id"
+                            (change)="changeMenuAll($event)"
+                            [checked]="isChecked(menu.id, 'menu')"
+                            [title]="menu.code">
+                {{menu.code}}
+              </mat-checkbox>
+              <div class="menuF1List">
+                <div class="menuF1" *ngFor="let menuF1 of this.menuLv2">
+                  <mat-checkbox *ngIf="menuF1.parentMenu.id === menu.id"
+                                [value]="menuF1.id"
+                                (change)="changeMenuChild($event)"
+                                [checked]="isChecked(menuF1.id, 'menu')"
+                                [title]="menuF1.code">
+                    {{menuF1.code}}
+                  </mat-checkbox>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <hr>
+      <h3>{{'role.management.modal.permission'|translate}}:</h3>
+      <div class="permissionList" fxLayout="row wrap" fxLayoutAlign="left">
+        <div class="permission" *ngFor="let permission of permissionList" fxFlex="50%" fxFlex.lt-md="100%" fxFlex.gt-lg="calc(100%/3)">
+          <mat-checkbox [value]="permission.id"
+                        (change)="changePermission($event)"
+                        [checked]="isChecked(permission.id, 'permission')">
+            <mat-label>{{permission.url}}</mat-label>
+          </mat-checkbox>
+        </div>
+
+      </div>
+    </mat-dialog-content>
+    <div class="btn-sec">
+      <button mat-raised-button type="submit" color="primary" class="Update-btn"
+              (click)="onSubmit()">{{'btnAddEdit'|translate}}</button>
+      <!--[disabled]="addEditForm.invalid"-->
+    </div>
+
+
+  </div>
+
+</div>

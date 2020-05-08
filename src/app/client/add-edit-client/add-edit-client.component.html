@@ -1,0 +1,159 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">{{this.title | translate}}</h2>
+  </div>
+  <div>
+
+    <form [formGroup]="addEditForm">
+      <mat-dialog-content>
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.clientId'|translate}}"
+                       formControlName="clientId"
+                       required [readonly]="isDetail() || isEdit()">
+                <mat-error *ngIf="addEditForm.controls.clientId.hasError('required')">
+                  {{'client.management.modal.clientId.empty'|translate}}
+                </mat-error>
+                <mat-error *ngIf="addEditForm.controls.clientId.hasError('pattern')">
+                  {{'client.management.modal.clientId.pattern'|translate}}
+                </mat-error>
+
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.resourceIds'| translate}}"
+                       formControlName="resourceIds" [readonly]="isDetail()">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.clientSecret'| translate}}"
+                       formControlName="clientSecret" [readonly]="isDetail() || isEdit()">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <!--                <input matInput placeholder="{{'client.management.modal.scope'| translate}}"-->
+              <!--                       formControlName="scope" [readonly]="isDetail()">-->
+              <mat-label>{{'client.management.modal.scope'| translate}}: </mat-label>
+              <mat-checkbox [id]="this.READ_SCOPE" [value]="this.READ_SCOPE" (change)="createScope($event)"
+                            [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedScope(this.READ_SCOPE) ">{{this.READ_SCOPE.toUpperCase()}}
+              </mat-checkbox>
+              <mat-checkbox [id]="this.WRITE_SCOPE" [value]="this.WRITE_SCOPE" (change)="createScope($event)"
+                            [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedScope(this.WRITE_SCOPE) ">{{this.WRITE_SCOPE.toUpperCase()}}
+              </mat-checkbox>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+<!--              <mat-form-field>-->
+<!--                <input matInput placeholder="{{'client.management.modal.authorizedGrantTypes'| translate}}"-->
+<!--                       formControlName="authorizedGrantTypes" [readonly]="isDetail()">-->
+<!--              </mat-form-field>-->
+              <mat-label>{{'client.management.modal.authorizedGrantTypes'| translate}}: </mat-label>
+              <mat-checkbox [id]="this.PASSWORD_GRANT_TYPE" [value]="this.PASSWORD_GRANT_TYPE" (change)="createGrant_type($event)"
+                            [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedGrant_type(this.PASSWORD_GRANT_TYPE) ">{{this.PASSWORD_GRANT_TYPE}}
+              </mat-checkbox>
+              <mat-checkbox [id]="this.REFRESH_TOKEN" [value]="this.REFRESH_TOKEN" (change)="createGrant_type($event)"
+                            [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedGrant_type(this.REFRESH_TOKEN) ">{{this.REFRESH_TOKEN}}
+              </mat-checkbox>
+              <br>
+              <mat-checkbox [id]="this.CLIENT_CREDENTIALS" [value]="this.CLIENT_CREDENTIALS" (change)="createGrant_type($event)"
+                            [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedGrant_type(this.CLIENT_CREDENTIALS) ">{{this.CLIENT_CREDENTIALS}}
+              </mat-checkbox>
+              <mat-checkbox [id]="this.AUTHORIZATION_CODE" [value]="this.AUTHORIZATION_CODE" (change)="createGrant_type($event)"
+                            [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedGrant_type(this.AUTHORIZATION_CODE) ">{{this.AUTHORIZATION_CODE}}
+              </mat-checkbox>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.webServerRedirectUri'| translate}}"
+                       formControlName="webServerRedirectUri" [readonly]="isDetail()">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+<!--                <input matInput placeholder="{{'client.management.modal.authorities'| translate}}"-->
+<!--                       formControlName="authorities" [readonly]="isDetail()">-->
+                <mat-label>{{'client.management.modal.authorities'| translate}}: </mat-label>
+                <mat-checkbox [id]="this.ROLE_CLIENT" [value]="this.ROLE_CLIENT" (change)="createAuthorities($event)"
+                              [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedAuthorities(this.ROLE_CLIENT) ">{{this.ROLE_CLIENT}}
+                </mat-checkbox>
+                <mat-checkbox [id]="this.ROLE_TRUSTED_CLIENT" [value]="this.ROLE_TRUSTED_CLIENT" (change)="createAuthorities($event)"
+                              [disabled]="isDetail()" [checked]="(isDetail() || isEdit()) && isCheckedAuthorities(this.ROLE_TRUSTED_CLIENT) ">{{this.ROLE_TRUSTED_CLIENT}}
+                </mat-checkbox>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.accessTokenValidity'| translate}}"
+                       formControlName="accessTokenValidity" [readonly]="isDetail()">
+                <mat-error *ngIf="addEditForm.controls.accessTokenValidity.hasError('pattern')">
+                  {{'client.management.modal.accessTokenValidity.pattern'|translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.refreshTokenValidity'| translate}}"
+                       formControlName="refreshTokenValidity" [readonly]="isDetail()">
+                <mat-error *ngIf="addEditForm.controls.refreshTokenValidity.hasError('pattern')">
+                  {{'client.management.modal.refreshTokenValidity.pattern'|translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.additionalInformation'| translate}}"
+                       formControlName="additionalInformation" [readonly]="isDetail()">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <div class="text-inside">
+              <mat-form-field>
+                <input matInput placeholder="{{'client.management.modal.autoapprove'| translate}}"
+                       formControlName="autoapprove" [readonly]="isDetail()">
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+      </mat-dialog-content>
+      <div class="btn-sec" *ngIf="!isDetail()">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn"
+                (click)="onSubmit()"
+                [disabled]="addEditForm.invalid">{{'btnAddEdit'|translate}}</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+

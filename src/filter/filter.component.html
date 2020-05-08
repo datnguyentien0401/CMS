@@ -1,0 +1,6 @@
+<mat-form-field>
+  <mat-label>{{'menu.management.table.clientId' | translate}}</mat-label>
+  <mat-select class="mat-select-theme" ngModel (ngModelChange)="selectClientId($event)">
+    <mat-option *ngFor="let id of clientIds" [value]="id">{{id}}</mat-option>
+  </mat-select>
+</mat-form-field>

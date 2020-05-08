@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  //max-height: 700px;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  //max-height: 580px;
+}
+
+mat-form-field {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  margin-bottom: 1rem;
+  width: calc(80% - 2.5rem - 2.5rem);
+}
+
+//.mat-row, .mat-header-row {
+//  min-width: 1200px;
+//  width: 100%;
+//}
+
+mat-cell, mat-header-cell {
+  padding-left: 1%;
+}
+
+mat-header-cell:first-child, mat-cell:first-child {
+  max-width: 50px;
+  padding-left: 2%;
+}
+
+.cdk-column-scope {
+  max-width: 100px;
+  padding-left: 2%;
+}
+
+.cdk-column-addEdit, .cdk-column-delete, .cdk-column-detail {
+  max-width: 70px;
+  padding-left: 2%;
+}
+
+.mat-column-accessTokenValidity, .mat-cell-accessTokenValidity{
+  max-width: 100px;
+  padding-left: 2%;
+}
+
+.mat-column-clientId, .mat-cell-clientId{
+  max-width: 150px;
+  padding-left: 2%;
+}

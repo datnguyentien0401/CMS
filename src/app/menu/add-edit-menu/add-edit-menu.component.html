@@ -1,0 +1,96 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">{{this.title | translate}}</h2>
+  </div>
+  <div>
+    <form [formGroup]="addEditForm">
+      <mat-grid-list cols="1" rowHeight="85px" >
+<!--        (window:resize)="onResize($event)"-->
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <mat-select matInput placeholder="{{'menu.management.modal.clientId'|translate}}"
+                          formControlName="clientId" required>
+                <mat-option *ngFor="let id of options" [value]="id">{{id}}</mat-option>
+              </mat-select>
+<!--              [readonly]="isEdit()"-->
+              <mat-error *ngIf="addEditForm.controls.clientId.hasError('required')">
+                {{'menu.management.modal.clientId.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.clientId.hasError('pattern')">
+                {{'menu.management.modal.clientId.pattern'|translate}}
+              </mat-error>
+
+              <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'menu.management.modal.code' | translate}}" formControlName="code" required>
+              <mat-error *ngIf="addEditForm.controls.code.hasError('required')">
+                {{'menu.management.modal.code.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.code.hasError('pattern')">
+                {{'menu.management.modal.code.pattern'|translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'menu.management.modal.url'| translate}}" formControlName="url">
+
+            </mat-form-field>
+
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <mat-select matInput placeholder="{{'menu.management.modal.appType'|translate}}"
+                          formControlName="appType" required>
+                <mat-option value="WEB">WEB</mat-option>
+                <mat-option value="MOBILE">MOBILE</mat-option>
+              </mat-select>
+              <mat-error *ngIf="addEditForm.controls.appType.hasError('required')">
+                {{'menu.management.modal.appType.empty'|translate}}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <mat-label>{{'menu.management.modal.parentMenu'|translate}}</mat-label>
+              <mat-select formControlName="parentMenu" [(ngModel)]="selected" >
+                <mat-option [value]="-1">--select something --</mat-option>
+                <mat-option *ngFor="let menu of this.menus" [value]="menu.id"
+                [title]="menu.clientId" >
+                  {{menu.code}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="btn-sec">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="onSubmit()"
+                [disabled]="addEditForm.invalid">{{'btnAddEdit'|translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

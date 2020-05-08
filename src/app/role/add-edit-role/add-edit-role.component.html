@@ -1,0 +1,67 @@
+<div>
+  <div class="add-title">
+    <h2 class="primary">{{this.title | translate}}</h2>
+  </div>
+  <div>
+    <form [formGroup]="addEditForm">
+      <mat-grid-list cols="1" rowHeight="85px">
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <mat-select matInput placeholder="{{'role.management.modal.clientId'|translate}}"
+                          formControlName="clientId" required>
+                <mat-option *ngFor="let id of options" [value]="id">{{id}}</mat-option>
+              </mat-select>
+              <mat-autocomplete #auto="matAutocomplete"
+                                (optionSelected)="getOptionValue($event)">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="addEditForm.controls.clientId.hasError('required')">
+                {{'role.management.modal.clientId.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.clientId.hasError('pattern')">
+                {{'role.management.modal.clientId.pattern'|translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'role.management.modal.roleName'|translate}}" formControlName="roleName"
+                     required>
+              <mat-error *ngIf="addEditForm.controls.roleName.hasError('required')">
+                {{'role.management.modal.roleName.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.roleName.hasError('textNotAccented')">
+                {{'role.management.modal.roleName.pattern'|translate}}
+              </mat-error>
+
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'role.management.modal.description'| translate}}"
+                     formControlName="description" required>
+              <mat-error *ngIf="addEditForm.controls.description.hasError('required')">
+                {{'role.management.modal.description.empty'|translate}}
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="btn-sec">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="onSubmit()"
+                [disabled]="addEditForm.invalid">{{'btnAddEdit'|translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+

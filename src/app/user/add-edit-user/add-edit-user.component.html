@@ -1,0 +1,55 @@
+<div class="add_editUser">
+  <div class="add-title">
+    <h2 class="primary">{{this.title | translate}}</h2>
+  </div>
+  <div>
+    <form [formGroup]="addEditForm">
+      <mat-grid-list cols="1" rowHeight="85px">
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'user.management.modal.username'|translate}}" formControlName="username" [readonly]="isEdit()" required>
+              <mat-error *ngIf="addEditForm.controls.username.hasError('required')">
+                {{'user.management.modal.username.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.username.hasError('pattern')">
+                {{'user.management.modal.username.pattern'|translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'user.management.modal.firstname'|translate}}" formControlName="firstName" required>
+              <mat-error *ngIf="addEditForm.controls.firstName.hasError('required')">
+                {{'user.management.modal.firstname.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.firstName.hasError('pattern')">
+                {{'user.management.modal.firstname.pattern'|translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="text-inside">
+            <mat-form-field>
+              <input matInput placeholder="{{'user.management.modal.lastname'|translate}}" formControlName="lastName" required>
+              <mat-error *ngIf="addEditForm.controls.lastName.hasError('required')">
+                {{'user.management.modal.lastname.empty'|translate}}
+              </mat-error>
+              <mat-error *ngIf="addEditForm.controls.lastName.hasError('pattern')">
+                {{'user.management.modal.lastname.pattern'|translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div class="btn-sec">
+        <button mat-raised-button type="submit" color="primary" class="Update-btn" (click)="onSubmit()" [disabled]="addEditForm.invalid">{{'btnAddEdit'|translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>

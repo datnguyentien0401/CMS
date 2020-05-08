@@ -1,0 +1,53 @@
+h2, h3 {
+  margin: 0;
+}
+
+.btn-sec {
+  margin-right: 5rem !important;
+  text-align: right;
+  margin-top: 1.5em;
+}
+
+.permission {
+  height: 40px;
+  max-width: 50px;
+  overflow: hidden;
+}
+
+mat-dialog-content {
+  height: 343px;
+}
+
+@media (max-width: 800px) {
+  .btn-sec {
+    margin-right: 1rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-sec {
+    margin-right: 1rem !important;
+  }
+}
+
+.menuF1List{
+  margin-left: 3%;
+}
+.menu{
+  padding-top: 2%;
+  overflow: hidden;
+}
+
+.MOBILE{
+  border-bottom: 1px grey solid;
+  overflow: hidden;
+}
+
+.WEB{
+  margin-top: 1%;
+}
+
+b{
+  margin-left: 1%;
+}
+
